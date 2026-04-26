@@ -145,19 +145,20 @@ public:
  *    - Set the grayscale value in the output image
  * 3. Return the grayscale image
  */
-Image convertToGrayscale(const Image& input) {
+Image convertToGrayscale(const Image& input){
     int height = input.getHeight();
     int width = input.getWidth();
-    Image output(width, height, 1); // Single channel for grayscale
-
-    // TODO: Implement this function
-    // For each pixel:
-    //   Get R, G, B values from input image
-    //   Calculate gray = 0.299*R + 0.587*G + 0.114*B
-    //   Set output(y, x, 0) = gray
-
-    return output;
+    Image output(width, height, 1);
+for (int y = 0; y < height; y++){
+    for (int x = 0; x < width; x++){
+        int R = input(y, x, 0);
+        int G = input(y, x, 1);
+        int B = input(y, x, 2);
+        int gray = (int)(0.299 * R + 0.587 * G + 0.114 * B);
+        output(y, x, 0) = gray;
+    }
 }
+return output;}
 
 /**
  * Flips image horizontally (left to right)
@@ -224,13 +225,17 @@ Image adjustBrightness(const Image& input, int value) {
     int channels = input.getChannels();
     Image output(width, height, channels);
 
-    // TODO: Implement this function
-    // For each pixel and each channel:
-    //   new_value = input(y, x, c) + value
-    //   output(y, x, c) = max(0, min(255, new_value))
-
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            for (int c = 0; c < channels; c++) {
+                int new_val = input(y, x, c) + value;
+                output(y, x, c) = max(0, min(255, new_val));
+            }
+        }
+    }
     return output;
 }
+
 
 /**
  * Adjusts image contrast
