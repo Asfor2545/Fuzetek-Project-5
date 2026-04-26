@@ -187,8 +187,6 @@ return output;}
 
     return output;
 }
-    return output;
-}
 
 /**
  * Flips image vertically (top to bottom)
@@ -274,8 +272,6 @@ Image adjustContrast(const Image& input, float factor) {
 
     return output;
 }
-    return output;
-}
 
 /**
  * Applies a simple blur filter
@@ -292,7 +288,7 @@ Image applyBlur(const Image& input) {
     int height = input.getHeight();
     int width = input.getWidth();
     int channels = input.getChannels();
-    Image output(width, height, channels); // Initialized to 0 [cite: 115]
+    Image output(width, height, channels); // Initialized to 0 
 
     for (int y = 1; y < height - 1; y++){
         for (int x = 1; x < width - 1; x++){
